@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TaTySho.SettingsPage"
+             Title="Налаштування"
+             BackgroundColor="{AppThemeBinding Light=#F9F9F9, Dark=#1E1E1E}">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="20" Padding="30" VerticalOptions="Center">
+            <Label Text="Налаштування" FontSize="28" FontAttributes="Bold" TextColor="{AppThemeBinding Light=#333, Dark=White}" HorizontalOptions="Center" />
+
+            <Frame CornerRadius="20" Padding="20" BackgroundColor="{AppThemeBinding Light=White, Dark=#333}" HasShadow="True" BorderColor="Transparent">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Грати до:" FontSize="18" TextColor="Gray" />
+                    <Label x:Name="ScoreLabel" Text="30 очок" FontSize="32" FontAttributes="Bold" TextColor="#662D8C" HorizontalOptions="Center" />
+                    <Slider x:Name="ScoreSlider" Minimum="10" Maximum="100" Value="30" ValueChanged="OnScoreChanged" MinimumTrackColor="#662D8C" ThumbColor="#662D8C" />
+                </VerticalStackLayout>
+            </Frame>
+
+            <Frame CornerRadius="20" Padding="20" BackgroundColor="{AppThemeBinding Light=White, Dark=#333}" HasShadow="True" BorderColor="Transparent">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Час раунду:" FontSize="18" TextColor="Gray" />
+                    <Label x:Name="TimeLabel" Text="60 сек" FontSize="32" FontAttributes="Bold" TextColor="#FF9933" HorizontalOptions="Center" />
+                    <Slider x:Name="TimeSlider" Minimum="10" Maximum="120" Value="60" ValueChanged="OnTimeChanged" MinimumTrackColor="#FF9933" ThumbColor="#FF9933" />
+                </VerticalStackLayout>
+            </Frame>
+
+            <Frame CornerRadius="20" Padding="20" BackgroundColor="{AppThemeBinding Light=White, Dark=#333}" HasShadow="True" BorderColor="Transparent">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Гучність ефектів:" FontSize="18" TextColor="Gray" />
+                    <Slider x:Name="VolumeSlider" Minimum="0" Maximum="1" Value="1" ValueChanged="OnVolumeChanged" MinimumTrackColor="#ED1E79" ThumbColor="#ED1E79" />
+                </VerticalStackLayout>
+            </Frame>
+
+            <Frame CornerRadius="20" Padding="15" BackgroundColor="{AppThemeBinding Light=White, Dark=#333}" HasShadow="True" BorderColor="Transparent">
+                <Grid ColumnDefinitions="*, Auto">
+                    <Label Text="Темна тема" VerticalOptions="Center" FontSize="18" TextColor="{AppThemeBinding Light=#333, Dark=White}" />
+                    <Switch x:Name="ThemeSwitch" Grid.Column="1" Toggled="OnThemeToggled" OnColor="#662D8C" />
+                </Grid>
+            </Frame>
+
+            <Button Text="Зберегти" Clicked="OnSaveClicked" BackgroundColor="#662D8C" TextColor="White" CornerRadius="25" HeightRequest="50" Margin="0,10,0,20" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

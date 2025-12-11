@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TaTySho.TeamPage"
+             NavigationPage.HasNavigationBar="False">
+    <Grid>
+        <BoxView Color="#1A2980">
+            <BoxView.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#1A2980" Offset="0.0" />
+                    <GradientStop Color="#26D0CE" Offset="1.0" />
+                </LinearGradientBrush>
+            </BoxView.Background>
+        </BoxView>
+        <BoxView Color="#40000000" />
+
+        <Grid RowDefinitions="Auto, *, Auto" Padding="20">
+            <Label Text="Хто грає?" FontSize="32" FontAttributes="Bold" TextColor="White" Margin="0,20"/>
+
+            <CollectionView Grid.Row="1" x:Name="TeamsList">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="0,5">
+                            <Frame CornerRadius="20" Padding="15,0" BackgroundColor="White" HeightRequest="60">
+                                <Grid ColumnDefinitions="*, Auto">
+                                    <Entry Text="{Binding Name}" Placeholder="Команда..." TextColor="#333" FontSize="18" VerticalOptions="Center"/>
+                                    <Button Grid.Column="1" Text="🗑" BackgroundColor="Transparent" TextColor="#FF6B6B" Clicked="OnRemoveTeamClicked" CommandParameter="{Binding .}" FontSize="20"/>
+                                </Grid>
+                            </Frame>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <VerticalStackLayout Grid.Row="2" Spacing="15" Margin="0,20">
+                <Button Text="+ Додати команду" Clicked="OnAddTeamClicked" BackgroundColor="#30FFFFFF" TextColor="White" CornerRadius="25" HeightRequest="50"/>
+                <Button Text="ДАЛІ: ОБРАТИ ТЕМУ ➡️" Clicked="OnNextClicked" BackgroundColor="White" TextColor="#1A2980" FontAttributes="Bold" CornerRadius="25" HeightRequest="60"/>
+            </VerticalStackLayout>
+        </Grid>
+    </Grid>
+</ContentPage>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TaTySho.DeckPage"
+             NavigationPage.HasNavigationBar="False">
+    <Grid>
+        <BoxView Color="#1A2980">
+            <BoxView.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#1A2980" Offset="0.0" />
+                    <GradientStop Color="#26D0CE" Offset="1.0" />
+                </LinearGradientBrush>
+            </BoxView.Background>
+        </BoxView>
+        <BoxView Color="#40000000" />
+
+        <Grid RowDefinitions="Auto, *" Padding="20">
+            <Label Text="Обери тему" FontSize="32" FontAttributes="Bold" TextColor="White" Margin="0,20"/>
+
+            <CollectionView Grid.Row="1" x:Name="DecksCollection" SelectionMode="None">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical" Span="2" HorizontalItemSpacing="15" VerticalItemSpacing="15"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame CornerRadius="25" HeightRequest="180" Padding="10" BorderColor="Transparent" HasShadow="True">
+                            <Frame.Background>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                    <GradientStop Color="{Binding StartColor}" Offset="0.0" />
+                                    <GradientStop Color="{Binding EndColor}" Offset="1.0" />
+                                </LinearGradientBrush>
+                            </Frame.Background>
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnDeckTapped" CommandParameter="{Binding .}"/>
+                            </Frame.GestureRecognizers>
+
+                            <VerticalStackLayout Spacing="10" VerticalOptions="Center" InputTransparent="True">
+                                <Label Text="{Binding Icon}" FontSize="50" HorizontalOptions="Center"/>
+                                <Label Text="{Binding Name}" FontSize="18" FontAttributes="Bold" TextColor="White" HorizontalOptions="Center"/>
+                                <Label Text="{Binding Description}" FontSize="12" TextColor="#E0E0E0" HorizontalOptions="Center" HorizontalTextAlignment="Center"/>
+                            </VerticalStackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+    </Grid>
+</ContentPage>

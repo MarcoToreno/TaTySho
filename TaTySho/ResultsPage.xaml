@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TaTySho.ResultsPage"
+             BackgroundColor="#F0F0F0"
+             Title="Результати"
+             NavigationPage.HasNavigationBar="False">
+
+    <Grid>
+        <Grid RowDefinitions="Auto, Auto, Auto, *, Auto" Padding="30" ZIndex="1">
+
+            <Label Text="Раунд завершено!" FontSize="28" FontAttributes="Bold" HorizontalOptions="Center" TextColor="#333" Margin="0,20,0,20"/>
+
+            <Frame Grid.Row="1" CornerRadius="20" HasShadow="True" BorderColor="White" BackgroundColor="White" Padding="20">
+                <VerticalStackLayout Spacing="15">
+                    <Grid ColumnDefinitions="*, Auto">
+                        <Label x:Name="Team1NameLabel" Text="Команда 1" FontSize="20" FontAttributes="Bold" TextColor="#662D8C"/>
+                        <Label x:Name="Team1ScoreLabel" Grid.Column="1" Text="0" FontSize="20" FontAttributes="Bold" TextColor="#333"/>
+                    </Grid>
+                    <BoxView HeightRequest="1" Color="#E0E0E0" />
+                    <Grid ColumnDefinitions="*, Auto">
+                        <Label x:Name="Team2NameLabel" Text="Команда 2" FontSize="20" FontAttributes="Bold" TextColor="#ED1E79"/>
+                        <Label x:Name="Team2ScoreLabel" Grid.Column="1" Text="0" FontSize="20" FontAttributes="Bold" TextColor="#333"/>
+                    </Grid>
+                </VerticalStackLayout>
+            </Frame>
+
+            <Frame x:Name="PunishmentFrame" 
+                   Grid.Row="2" 
+                   IsVisible="False"
+                   CornerRadius="20" 
+                   BackgroundColor="#FFEBEE" 
+                   BorderColor="#FFCDD2" 
+                   Padding="15" 
+                   Margin="0,20,0,0">
+                <VerticalStackLayout Spacing="5">
+                    <Label Text="😈 ПОКАРАННЯ ДЛЯ ЛУЗЕРІВ:" FontSize="14" FontAttributes="Bold" TextColor="#C62828" HorizontalOptions="Center"/>
+                    <Label x:Name="PunishmentLabel" 
+                           Text="..." 
+                           FontSize="18" 
+                           TextColor="#333" 
+                           HorizontalOptions="Center" 
+                           HorizontalTextAlignment="Center"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <VerticalStackLayout Grid.Row="3" VerticalOptions="Center" Spacing="10">
+                <Label Text="Наступний хід за:" FontSize="16" TextColor="Gray" HorizontalOptions="Center"/>
+                <Label x:Name="NextTeamLabel" Text="..." FontSize="24" FontAttributes="Bold" TextColor="#512BD4" HorizontalOptions="Center"/>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Grid.Row="4" Spacing="15">
+                <Button x:Name="NextRoundBtn" Text="ГРАТИ ДАЛІ" Clicked="OnNextRoundClicked" BackgroundColor="#512BD4" TextColor="White" CornerRadius="25" HeightRequest="60" FontSize="18" FontAttributes="Bold"/>
+                <Button Text="Вийти в меню" Clicked="OnMenuClicked" BackgroundColor="Transparent" TextColor="Gray" FontSize="16"/>
+            </VerticalStackLayout>
+        </Grid>
+
+        <AbsoluteLayout x:Name="ConfettiLayout" InputTransparent="True" ZIndex="2" />
+    </Grid>
+</ContentPage>

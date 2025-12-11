@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TaTySho.MainPage"
+             Shell.NavBarIsVisible="False"
+             NavigationPage.HasNavigationBar="False">
+
+    <ContentPage.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#240b36" Offset="0.0" />
+            <GradientStop Color="#c31432" Offset="1.0" />
+        </LinearGradientBrush>
+    </ContentPage.Background>
+
+    <Grid>
+        <Grid.GestureRecognizers>
+            <SwipeGestureRecognizer Direction="Left" Swiped="OnSwiped" Threshold="20"/>
+            <SwipeGestureRecognizer Direction="Right" Swiped="OnSwiped" Threshold="20"/>
+        </Grid.GestureRecognizers>
+
+        <AbsoluteLayout InputTransparent="True" HorizontalOptions="Fill" VerticalOptions="Fill">
+            <BoxView x:Name="Particle1" Color="#FFFF00" CornerRadius="50" Opacity="0.4" AbsoluteLayout.LayoutBounds="0.1, 0.2, 20, 20" AbsoluteLayout.LayoutFlags="PositionProportional" />
+            <BoxView x:Name="Particle2" Color="#00FFFF" CornerRadius="50" Opacity="0.3" AbsoluteLayout.LayoutBounds="0.9, 0.1, 40, 40" AbsoluteLayout.LayoutFlags="PositionProportional" />
+            <BoxView x:Name="Particle3" Color="#FF00FF" CornerRadius="50" Opacity="0.2" AbsoluteLayout.LayoutBounds="0.5, 0.9, 30, 30" AbsoluteLayout.LayoutFlags="PositionProportional" />
+            <BoxView x:Name="Particle4" Color="#FFFFFF" CornerRadius="50" Opacity="0.2" AbsoluteLayout.LayoutBounds="0.1, 0.8, 15, 15" AbsoluteLayout.LayoutFlags="PositionProportional" />
+            <BoxView x:Name="Particle5" Color="#FF9933" CornerRadius="50" Opacity="0.3" AbsoluteLayout.LayoutBounds="0.8, 0.6, 25, 25" AbsoluteLayout.LayoutFlags="PositionProportional" />
+        </AbsoluteLayout>
+
+        <BoxView Color="#30000000" InputTransparent="True" HorizontalOptions="Fill" VerticalOptions="Fill"/>
+
+        <Grid RowDefinitions="Auto, Auto, *, Auto" Padding="25" RowSpacing="15">
+
+            <Frame BackgroundColor="#40FFFFFF" CornerRadius="20" Padding="20,10" HorizontalOptions="Center" BorderColor="Transparent" InputTransparent="True">
+                <Label x:Name="CurrentTeamLabel" Text="Хід команди: ..." FontSize="18" FontAttributes="Bold" TextColor="White"/>
+            </Frame>
+
+            <Label Grid.Row="1" x:Name="TimerLabel" Text="00:60" FontSize="60" FontAttributes="Bold" HorizontalOptions="Center" TextColor="White" InputTransparent="True">
+                <Label.Shadow>
+                    <Shadow Brush="Black" Offset="2,2" Radius="5" Opacity="0.5"/>
+                </Label.Shadow>
+            </Label>
+
+            <Frame x:Name="CardFrame" 
+                   Grid.Row="2" 
+                   CornerRadius="40" 
+                   HasShadow="True" 
+                   BorderColor="White" 
+                   BackgroundColor="White" 
+                   VerticalOptions="Center" 
+                   HeightRequest="320"
+                   Margin="10"
+                   InputTransparent="True">
+
+                <Frame.Shadow>
+                    <Shadow Brush="Black" Offset="0,10" Radius="20" Opacity="0.4" />
+                </Frame.Shadow>
+
+                <Grid RowDefinitions="*, Auto" Padding="10">
+                    <Label x:Name="WordLabel" 
+                           Text="Готуйся..." 
+                           FontSize="42" 
+                           FontAttributes="Bold" 
+                           HorizontalOptions="Center" 
+                           VerticalOptions="Center"
+                           HorizontalTextAlignment="Center" 
+                           TextColor="#333"
+                           MaxLines="3"/>
+
+                    <Grid Grid.Row="1" ColumnDefinitions="*,*" Margin="0,0,0,10">
+                        <Label Grid.Column="0" Text="🟥 ПРОПУСК" FontSize="12" FontAttributes="Bold" TextColor="#FF6B6B" HorizontalOptions="Start"/>
+                        <Label Grid.Column="1" Text="ВГАДАВ 🟩" FontSize="12" FontAttributes="Bold" TextColor="#4ECDC4" HorizontalOptions="End"/>
+                    </Grid>
+                </Grid>
+            </Frame>
+
+            <Grid Grid.Row="3" HeightRequest="80" InputTransparent="False" ZIndex="100">
+
+                <Button x:Name="StartBtn" 
+                        Text="ПОЧАТИ РАУНД" 
+                        Clicked="OnStartClicked" 
+                        BackgroundColor="White" 
+                        TextColor="#c31432" 
+                        FontAttributes="Bold"
+                        HeightRequest="60" 
+                        CornerRadius="30" 
+                        FontSize="20"
+                        IsVisible="True"/>
+
+                <Grid x:Name="GameButtonsGrid" ColumnDefinitions="*,*" ColumnSpacing="20" IsVisible="False">
+                    <Button Text="🟥" Clicked="OnSkipClicked" BackgroundColor="#FFEBEE" TextColor="#FF6B6B" BorderColor="#FFCDD2" BorderWidth="2" CornerRadius="30" HeightRequest="60" FontSize="24"/>
+                    <Button Grid.Column="1" Text="🟩" Clicked="OnGuessClicked" BackgroundColor="#E0F7FA" TextColor="#4ECDC4" BorderColor="#B2EBF2" BorderWidth="2" CornerRadius="30" HeightRequest="60" FontSize="24"/>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Grid>
+</ContentPage>

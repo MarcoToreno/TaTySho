@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TaTySho.MenuPage"
+             Shell.NavBarIsVisible="False"
+             NavigationPage.HasNavigationBar="False">
+
+    <ContentPage.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#1A2980" Offset="0.0" />
+            <GradientStop Color="#26D0CE" Offset="1.0" />
+        </LinearGradientBrush>
+    </ContentPage.Background>
+
+    <Grid>
+        <AbsoluteLayout InputTransparent="True" HorizontalOptions="Fill" VerticalOptions="Fill">
+            <BoxView x:Name="Particle1" Color="#FFFF00" CornerRadius="50" Opacity="0.6" AbsoluteLayout.LayoutBounds="0.2, 0.3, 20, 20" AbsoluteLayout.LayoutFlags="PositionProportional" />
+            <BoxView x:Name="Particle2" Color="#00FFFF" CornerRadius="50" Opacity="0.5" AbsoluteLayout.LayoutBounds="0.8, 0.1, 30, 30" AbsoluteLayout.LayoutFlags="PositionProportional" />
+            <BoxView x:Name="Particle3" Color="#FF00FF" CornerRadius="50" Opacity="0.4" AbsoluteLayout.LayoutBounds="0.5, 0.8, 25, 25" AbsoluteLayout.LayoutFlags="PositionProportional" />
+            <BoxView x:Name="Particle4" Color="#FFFFFF" CornerRadius="50" Opacity="0.3" AbsoluteLayout.LayoutBounds="0.1, 0.9, 15, 15" AbsoluteLayout.LayoutFlags="PositionProportional" />
+            <BoxView x:Name="Particle5" Color="#FF9933" CornerRadius="50" Opacity="0.5" AbsoluteLayout.LayoutBounds="0.9, 0.5, 35, 35" AbsoluteLayout.LayoutFlags="PositionProportional" />
+        </AbsoluteLayout>
+
+        <BoxView Color="{AppThemeBinding Light=#20FFFFFF, Dark=#40000000}" InputTransparent="True" HorizontalOptions="Fill" VerticalOptions="Fill"/>
+
+        <Grid RowDefinitions="Auto, *, Auto" Padding="20,10,20,10" RowSpacing="10" ZIndex="1" HorizontalOptions="Fill" VerticalOptions="Fill">
+
+            <Grid Grid.Row="0" ColumnDefinitions="*, Auto" HeightRequest="100">
+                <Image Source="logo_header.png" Aspect="AspectFit" HorizontalOptions="Start" VerticalOptions="Center" Margin="0,10,0,0">
+                    <Image.Shadow>
+                        <Shadow Brush="Black" Offset="2,4" Radius="6" Opacity="0.3"/>
+                    </Image.Shadow>
+                </Image>
+                <Button Grid.Column="1" Text="⚙️" FontSize="24" BackgroundColor="White" TextColor="Black" CornerRadius="25" WidthRequest="55" HeightRequest="55" Clicked="OnSettingsClicked" VerticalOptions="Center">
+                    <Button.Shadow>
+                        <Shadow Brush="Black" Offset="0,4" Radius="8" Opacity="0.2"/>
+                    </Button.Shadow>
+                </Button>
+            </Grid>
+
+            <Frame Grid.Row="1" CornerRadius="30" BackgroundColor="#40FFFFFF" BorderColor="Transparent" Padding="20" HasShadow="False">
+                <Grid RowDefinitions="Auto, *, Auto">
+                    <Label Text="Хто грає?" FontSize="18" FontAttributes="Bold" TextColor="White" Margin="0,0,0,10"/>
+                    <CollectionView Grid.Row="1" x:Name="TeamsList" VerticalScrollBarVisibility="Never">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Padding="0,5">
+                                    <Frame CornerRadius="25" Padding="15,0" BackgroundColor="White" HeightRequest="55" BorderColor="Transparent" HasShadow="False">
+                                        <Grid ColumnDefinitions="*, Auto">
+                                            <Entry Text="{Binding Name}" Placeholder="Назва..." TextColor="#333" PlaceholderColor="Gray" FontSize="16" VerticalOptions="Center"/>
+                                            <Button Grid.Column="1" Text="✕" BackgroundColor="Transparent" TextColor="#FF6B6B" FontSize="18" Clicked="OnRemoveTeamClicked" CommandParameter="{Binding .}" WidthRequest="40" ZIndex="10"/>
+                                        </Grid>
+                                    </Frame>
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                    <Button Grid.Row="2" Text="+ Додати" Clicked="OnAddTeamClicked" BackgroundColor="#1A2980" TextColor="White" CornerRadius="25" HeightRequest="50" Margin="0,10,0,0" FontAttributes="Bold" ZIndex="10">
+                        <Button.Shadow>
+                            <Shadow Brush="Black" Offset="0,2" Radius="4" Opacity="0.3"/>
+                        </Button.Shadow>
+                    </Button>
+                </Grid>
+            </Frame>
+
+            <VerticalStackLayout Grid.Row="2" Spacing="10" Margin="0,5,0,15">
+                <Label Text="Режим гри:" FontSize="16" TextColor="White" FontAttributes="Bold" Margin="5,0">
+                    <Label.Shadow>
+                        <Shadow Brush="Black" Offset="1,1" Radius="2" Opacity="0.5"/>
+                    </Label.Shadow>
+                </Label>
+
+                <Frame BackgroundColor="#40FFFFFF" CornerRadius="20" Padding="5" HasShadow="False" BorderColor="Transparent">
+                    <Grid ColumnDefinitions="*,*,*">
+                        <Button x:Name="BtnModeClassic" Text="🏆" FontSize="20" BackgroundColor="White" TextColor="#333" CornerRadius="15" HeightRequest="50" Clicked="OnModeChanged" CommandParameter="0"/>
+                        <Button x:Name="BtnModeSurvival" Grid.Column="1" Text="🔥" FontSize="20" BackgroundColor="Transparent" TextColor="White" CornerRadius="15" HeightRequest="50" Clicked="OnModeChanged" CommandParameter="1"/>
+                        <Button x:Name="BtnModeSolo" Grid.Column="2" Text="👑" FontSize="20" BackgroundColor="Transparent" TextColor="White" CornerRadius="15" HeightRequest="50" Clicked="OnModeChanged" CommandParameter="2"/>
+                    </Grid>
+                </Frame>
+
+                <Label x:Name="ModeDescriptionLabel" Text="🏆 Класика: Стандартна гра на час" TextColor="#E0E0E0" FontSize="12" HorizontalOptions="Center" FontAttributes="Italic"/>
+
+                <CollectionView x:Name="DecksCollection" SelectionMode="None" HeightRequest="180">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Horizontal" ItemSpacing="15"/>
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame CornerRadius="30" WidthRequest="140" HeightRequest="170" HasShadow="True" BorderColor="Transparent" Padding="10">
+                                <Frame.Background>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                        <GradientStop Color="{Binding StartColor}" Offset="0.0" />
+                                        <GradientStop Color="{Binding EndColor}" Offset="1.0" />
+                                    </LinearGradientBrush>
+                                </Frame.Background>
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnDeckTapped" CommandParameter="{Binding .}" />
+                                </Frame.GestureRecognizers>
+                                <VerticalStackLayout Spacing="5" VerticalOptions="Center" InputTransparent="True">
+                                    <Label Text="{Binding Icon}" FontSize="50" HorizontalOptions="Center"/>
+                                    <Label Text="{Binding Name}" FontSize="15" FontAttributes="Bold" TextColor="White" HorizontalOptions="Center" HorizontalTextAlignment="Center"/>
+                                    <Label Text="{Binding Description}" FontSize="10" TextColor="#E0E0E0" HorizontalOptions="Center" HorizontalTextAlignment="Center" MaxLines="2"/>
+                                </VerticalStackLayout>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+        </Grid>
+    </Grid>
+</ContentPage>
